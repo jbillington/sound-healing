@@ -1,14 +1,37 @@
+<meta charset="UTF-8">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
+  :root {
+    --color-text-primary: #2c2418;
+    --color-text-secondary: #5a4e3e;
+    --color-text-tertiary: #9a8d7a;
+    --color-text-info: #6b5b3e;
+    --color-text-warning: #7a5a28;
+    --color-background-primary: #faf7f2;
+    --color-background-secondary: #f2ede4;
+    --color-background-warning: #f0e6d0;
+    --color-border-primary: #c4b89e;
+    --color-border-secondary: #d6ccb8;
+    --color-border-tertiary: #e8e0d0;
+    --color-accent: #8b6914;
+    --color-accent-soft: #c9a84c;
+    --color-cell-hover: #eee8da;
+    --color-cell-active: rgba(139, 105, 20, 0.08);
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--color-background-primary);
+  }
 
   .sd-root {
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     color: var(--color-text-primary);
-    max-width: 960px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
@@ -75,7 +98,7 @@
     border-radius: 20px;
     color: var(--color-text-secondary);
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.2s;
     background: transparent;
     text-decoration: none;
   }
@@ -83,6 +106,7 @@
   .sd-nav-pill:hover {
     background: var(--color-background-secondary);
     color: var(--color-text-primary);
+    border-color: var(--color-accent-soft);
   }
 
   .sd-section {
@@ -105,7 +129,7 @@
   .sd-section-num {
     font-size: 11px;
     font-weight: 500;
-    color: var(--color-text-tertiary);
+    color: var(--color-accent-soft);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     min-width: 2rem;
@@ -144,11 +168,13 @@
   }
 
   .sd-practitioner {
-    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
     padding: 1rem 1.25rem;
-    border-left: 2px solid var(--color-border-secondary);
+    border-left: 2px solid var(--color-accent-soft);
     margin-left: 3rem;
     max-width: 600px;
+    background: var(--color-cell-active);
+    border-radius: 0 4px 4px 0;
   }
 
   .sd-practitioner-label {
@@ -156,7 +182,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-text-tertiary);
+    color: var(--color-accent);
     margin-bottom: 0.4rem;
   }
 
@@ -164,6 +190,17 @@
     font-size: 13px;
     line-height: 1.75;
     color: var(--color-text-secondary);
+  }
+
+  .sd-practitioner a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-secondary);
+    transition: border-color 0.2s;
+  }
+
+  .sd-practitioner a:hover {
+    border-color: var(--color-accent);
   }
 
   .sd-table-section {
@@ -191,36 +228,39 @@
   .sd-table-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 6px;
+    background: #fff;
   }
 
   table.sd-dir {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 14px;
     table-layout: fixed;
-    min-width: 700px;
+    min-width: 900px;
   }
 
   table.sd-dir th {
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-tertiary);
-    padding: 8px 10px;
+    padding: 14px 16px;
     text-align: left;
-    border-bottom: 0.5px solid var(--color-border-secondary);
+    border-bottom: 1px solid var(--color-border-secondary);
     background: var(--color-background-secondary);
   }
 
-  table.sd-dir th:first-child { width: 18%; }
-  table.sd-dir th:not(:first-child) { width: 13.7%; }
+  table.sd-dir th:first-child { width: 17%; }
+  table.sd-dir th:not(:first-child) { width: 13.8%; }
 
   table.sd-dir td {
-    padding: 10px 10px;
+    padding: 0;
     vertical-align: top;
-    border-bottom: 0.5px solid var(--color-border-tertiary);
-    line-height: 1.5;
+    border-bottom: 1px solid var(--color-border-tertiary);
+    line-height: 1.55;
     color: var(--color-text-secondary);
   }
 
@@ -229,32 +269,75 @@
   table.sd-dir td:first-child {
     font-weight: 500;
     color: var(--color-text-primary);
-    font-size: 12px;
+    font-size: 13px;
+    padding: 16px 16px;
   }
 
-  table.sd-dir td.has-data {
+  table.sd-dir td.has-data a.sd-cell-link {
+    display: block;
+    padding: 16px 16px;
     color: var(--color-text-primary);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  table.sd-dir td.has-data a.sd-cell-link:hover {
+    background: var(--color-cell-hover);
+    color: var(--color-accent);
+  }
+
+  table.sd-dir td.has-data a.sd-cell-link .sd-cell-text {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+
+  table.sd-dir td.has-data a.sd-cell-link .sd-cell-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+
+  table.sd-dir td.has-data a.sd-cell-link:hover .sd-cell-source {
+    opacity: 1;
+  }
+
+  table.sd-dir td.has-data a.sd-cell-link .sd-cell-source::before {
+    content: '→';
+    font-size: 11px;
+  }
+
+  table.sd-dir td.has-data-nolink {
+    padding: 16px 16px;
+    color: var(--color-text-primary);
+    font-size: 13.5px;
   }
 
   table.sd-dir td.empty {
-    color: var(--color-text-tertiary);
+    color: var(--color-border-secondary);
+    padding: 16px 16px;
+    text-align: center;
+    font-size: 16px;
   }
 
-  table.sd-dir a {
-    color: var(--color-text-info);
-    text-decoration: none;
-    font-size: 10px;
-    display: block;
-    margin-top: 3px;
-    opacity: 0.8;
+  table.sd-dir tr:hover td {
+    background: rgba(139, 105, 20, 0.02);
   }
-
-  table.sd-dir a:hover { opacity: 1; text-decoration: underline; }
 
   .sd-note {
     font-size: 12px;
     color: var(--color-text-tertiary);
-    margin-top: 1rem;
+    margin-top: 1.25rem;
     line-height: 1.6;
     font-style: italic;
   }
@@ -274,7 +357,7 @@
 
   .sd-divider {
     text-align: center;
-    color: var(--color-text-tertiary);
+    color: var(--color-accent-soft);
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem;
     letter-spacing: 0.5em;
@@ -293,12 +376,12 @@
 <div class="sd-root">
 
   <div class="sd-masthead">
-    <p class="sd-eyebrow">Sound &amp; Frequency Healing — A Practitioner's Directory</p>
+    <p class="sd-eyebrow">Sound &amp; Frequency Healing, A Practitioner's Directory</p>
     <h1 class="sd-title">The body<br><em>always</em> listens.</h1>
-    <p class="sd-byline">John Billington, Georgetown, MA — April 5, 2026</p>
+    <p class="sd-byline">John Billington, Georgetown, MA. April 5, 2026</p>
     <p class="sd-intro">Sound has always been a healer. Monks and shamans knew long ago that humans respond to tone, rhythm and vibration to shift consciousness and ease suffering.</p>
-    <p class="sd-intro">This directory describes the emerging field of sound and frequency heling methods behind sound baths and more advanced clinical applications.  I've attempated here in this document to be comprehensive of all known ways that sound and frequencies can impact the brain, the body, and improve your nervous system, and both phisical and mental health.  
-      
+    <p class="sd-intro">This directory describes the emerging field of sound and frequency healing methods behind sound baths and more advanced clinical applications. I've attempted here in this document to be comprehensive of all known ways that sound and frequencies can impact the brain, the body, and improve your nervous system, and both physical and mental health.</p>
+
     <div class="sd-nav">
       <a class="sd-nav-pill" href="#gamma">Gamma Entrainment</a>
       <a class="sd-nav-pill" href="#binaural">Binaural Beats</a>
@@ -317,14 +400,14 @@
       <h2 class="sd-section-title">Gamma Entrainment &amp; 40 Hz Stimulation</h2>
     </div>
     <p class="sd-section-sub">The brain has its own rhythm. Science has found a way to strengthen it.</p>
-    <div class="sd-body">
-      <p>The brain generates electrical waves at many frequencies. Gamma waves, cycling forty times per second, are associated with sharp perception, memory consolidation, and cellular cleanup. When gamma activity weakens — as it does in Alzheimer's disease and cognitive decline — the brain struggles toear metabolic waste. Amyloid and tau proteins accumulate.</p>
-      <p>Researchers at MIT discovered that exposing the brain to forty-cycle-per-second pulses of sound and light could reactivate this rhythm and slow that accumulation. A pure forty hertz musical tone falls below what the ear perceives as pitch. The technique instead uses rapid clicks or pulses delivered at that rate. The ear hears them. The brain entrains to them. Clinical trials showed reduced tau biomarkers, preserved cognition, and slowed atrophy after daily one-hour sessions over months.</p>
-      <p>Extensions of this research now touch Parkinson's disease, stroke recovery, multiple sclerosis, and chemotherapy fog. Cognito Therapeutics is currently in Phase III clinical trials with a home-use device for Alzheimer's built entirely on this principle.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
-      <p>One of the most clinically validated forms of acoustic therapy available. Sessions can be offered using click-based audio tracks or dedicated devices. Daily use of thirty to sixty minutes is the studied protocol. <a href="https://cognitotx.com/" target="_blank">Cognito Therapeutics</a> &mdash; <a href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank">MIT Research Overview</a></p>
+      <p>One of the most clinically validated forms of acoustic therapy available. Sessions use click-based audio tracks or dedicated devices. The studied protocol is thirty to sixty minutes daily. <a href="https://cognitotx.com/" target="_blank">Cognito Therapeutics</a> | <a href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank">MIT Research Overview</a></p>
+    </div>
+    <div class="sd-body">
+      <p>The brain generates electrical waves at many frequencies. Gamma waves cycle forty times per second. They are associated with sharp perception, memory consolidation, and cellular cleanup. When gamma activity weakens, as it does in Alzheimer's and cognitive decline, the brain struggles to clear metabolic waste. Amyloid and tau proteins accumulate.</p>
+      <p>Researchers at MIT discovered that pulses of sound and light at forty cycles per second could reactivate this rhythm. A pure forty hertz tone falls below what the ear perceives as pitch. The technique uses rapid clicks delivered at that rate instead. The ear hears them. The brain entrains to them. Clinical trials showed reduced tau biomarkers, preserved cognition, and slowed atrophy after daily one-hour sessions over months.</p>
+      <p>This research now extends to Parkinson's disease, stroke recovery, multiple sclerosis, and chemotherapy fog. Cognito Therapeutics is in Phase III clinical trials with a home-use device for Alzheimer's built on this principle.</p>
     </div>
   </div>
 
@@ -334,14 +417,14 @@
       <h2 class="sd-section-title">Binaural Beats &amp; Isochronic Tones</h2>
     </div>
     <p class="sd-section-sub">Two slightly different tones. One frequency the brain creates on its own.</p>
-    <div class="sd-body">
-      <p>When one ear hears a tone at 200 Hz and the other hears 240 Hz, the brain perceives a phantom beat at 40 Hz. That is a binaural beat. The brain does not just hear it — it synchronizes to it. This is called entrainment. It is not metaphor. It is measurable in EEG recordings.</p>
-      <p>Isochronic tones work differently. They are single tones switched on and off at a precise rate. No headphones required. Both methods have been studied for focus, anxiety reduction, sleep induction, and pain relief. The frequency chosen shapes the target state: delta for sleep, theta for meditation and creativity, alpha for calm alertness, gamma for cognition and presence.</p>
-      <p>A 2025 parametric study in Nature Scientific Reports confirmed meaningful entrainment effects from precisely calibrated binaural protocols, particularly in the theta and gamma bands.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
-      <p>The most accessible tools in sound healing. Tracks are free on YouTube. Apps allow custom frequency programming. Headphones are essential for binaural beats. Isochronic tones work through speakers. Both integrate cleanly into existing session work. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10198548/" target="_blank">Systematic review (PMC, 2023)</a> &mdash; <a href="https://www.nature.com/articles/s41598-025-88517-z" target="_blank">Nature parametric study (2025)</a></p>
+      <p>The most accessible tools in sound healing. Tracks are free on YouTube. Apps allow custom frequency programming. Headphones are essential for binaural beats. Isochronic tones work through speakers. Both integrate cleanly into existing session work. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10198548/" target="_blank">Systematic review (PMC, 2023)</a> | <a href="https://www.nature.com/articles/s41598-025-88517-z" target="_blank">Nature parametric study (2025)</a></p>
+    </div>
+    <div class="sd-body">
+      <p>When one ear hears 200 Hz and the other hears 240 Hz, the brain perceives a phantom beat at 40 Hz. That is a binaural beat. The brain synchronizes to it. This is called entrainment. It is measurable in EEG recordings.</p>
+      <p>Isochronic tones work differently. They are single tones switched on and off at a precise rate. No headphones required. Both methods have been studied for focus, anxiety reduction, sleep induction, and pain relief. The frequency chosen shapes the target state. Delta for sleep. Theta for meditation and creativity. Alpha for calm alertness. Gamma for cognition and presence.</p>
+      <p>A 2025 parametric study in Nature Scientific Reports confirmed meaningful entrainment effects from precisely calibrated binaural protocols, particularly in the theta and gamma bands.</p>
     </div>
   </div>
 
@@ -350,15 +433,15 @@
       <span class="sd-section-num">03</span>
       <h2 class="sd-section-title">Vibroacoustic Therapy &amp; Low-Frequency Sound</h2>
     </div>
-    <p class="sd-section-sub">Sound you feel in the body, not just the ears.</p>
-    <div class="sd-body">
-      <p>Vibroacoustic therapy delivers low-frequency sound, typically between thirty and one hundred twenty hertz, directly into the body through a mat, table, or chair embedded with transducers. The tissues vibrate. The cells respond. Research shows effects on lymphatic drainage, inflammation reduction, pain relief, and nervous system regulation.</p>
-      <p>Clinical studies document meaningful gains for fibromyalgia patients in pain and sleep quality. Neurological rehabilitation programs use it for stroke and Parkinson's patients. The parasympathetic nervous system — the rest and repair mode — activates in response to these low-frequency vibrations. The vagus nerve responds. Heart rate slows. Breath deepens.</p>
-      <p>This is the technology that lives closest to the singing bowl tradition. The body becomes a resonating chamber.</p>
-    </div>
+    <p class="sd-section-sub">Sound you feel in the body.</p>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
       <p>Vibroacoustic tables and mats range from several hundred to several thousand dollars. They layer with other modalities. Music composed for vibroacoustic use emphasizes low-frequency content that drives the physiological response. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4325896/" target="_blank">Fibromyalgia study (PMC, 2015)</a></p>
+    </div>
+    <div class="sd-body">
+      <p>Vibroacoustic therapy delivers low-frequency sound, typically between thirty and one hundred twenty hertz, directly into the body through a mat, table, or chair embedded with transducers. The tissues vibrate. The cells respond. Research shows effects on lymphatic drainage, inflammation reduction, pain relief, and nervous system regulation.</p>
+      <p>Clinical studies document meaningful gains for fibromyalgia patients in pain and sleep quality. Neurological rehabilitation programs use it for stroke and Parkinson's patients. The parasympathetic nervous system, the body's rest and repair mode, activates in response to these low-frequency vibrations. The vagus nerve responds. Heart rate slows. Breath deepens.</p>
+      <p>This is the technology that lives closest to the singing bowl tradition. The body becomes a resonating chamber.</p>
     </div>
   </div>
 
@@ -368,14 +451,14 @@
       <h2 class="sd-section-title">Therapeutic Ultrasound &amp; Focused Neuromodulation</h2>
     </div>
     <p class="sd-section-sub">Sound precise enough to reach deep brain structures without surgery.</p>
-    <div class="sd-body">
-      <p>Focused ultrasound uses sound waves beyond the range of hearing, directed with precision into specific brain regions. Low intensity focused ultrasound (LIFU) can modulate neural activity without heat or damage. Overactive circuits quiet down. Underactive circuits wake up.</p>
-      <p>Current research targets essential tremor, Parkinson's disease, treatment-resistant depression, PTSD, and anxiety disorders. The technology is non-invasive. It requires no implants. In one study, transcranial ultrasound stimulation increased neuron sensitivity tenfold and modulated visual cortex activity for over forty minutes from a single session.</p>
-      <p>This is not a practitioner-administered tool today. It requires clinical equipment. But understanding it matters. It is the scientific confirmation that sound, directed with intention and precision, can reshape the brain.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
       <p>Awareness of this field strengthens the theoretical foundation of all acoustic work. It validates the premise that sound can reach deep tissue and neural structures non-invasively. Clinical referral partnerships with institutions exploring LIFU may serve advanced clients. <a href="https://www.nature.com/articles/s41587-025-02566-3" target="_blank">Nature LIFU research (2025)</a></p>
+    </div>
+    <div class="sd-body">
+      <p>Focused ultrasound uses sound waves beyond the range of hearing. They are directed with precision into specific brain regions. Low intensity focused ultrasound (LIFU) can modulate neural activity without heat or damage. Overactive circuits quiet down. Underactive circuits wake up.</p>
+      <p>Current research targets essential tremor, Parkinson's disease, treatment-resistant depression, PTSD, and anxiety disorders. The technology is non-invasive. It requires no implants. In one study, transcranial ultrasound stimulation increased neuron sensitivity tenfold. It modulated visual cortex activity for over forty minutes from a single session.</p>
+      <p>This is not a practitioner-administered tool today. It requires clinical equipment. Understanding it still matters. It confirms that sound, directed with precision, can reshape the brain.</p>
     </div>
   </div>
 
@@ -385,13 +468,13 @@
       <h2 class="sd-section-title">Singing Bowls, Gongs &amp; Sound Baths</h2>
     </div>
     <p class="sd-section-sub">The oldest technology. Still among the most effective.</p>
-    <div class="sd-body">
-      <p>Tibetan singing bowls resonate between one hundred ten and six hundred sixty hertz. Crystal bowls between four hundred and eight hundred hertz. Gongs extend into the lower registers, fifty hertz and below, adding physical resonance that participants feel in the chest and abdomen. When played together in a sound bath, combined frequencies shift brainwave states from beta waking consciousness toward alpha and theta — the territory of deep relaxation, insight, and healing.</p>
-      <p>EEG studies confirm this shift. A sixty-minute sound bath outperforms silence and progressive muscle relaxation in measured relaxation depth. Single sessions reduce tension, anger, fatigue, and depression by measurable margins — up to seventy-one percent on standardized mood scales — immediately following the session. Studies also show improvements in heart rate, blood pressure, and respiratory rate. The mechanism involves vagal tone activation. Low-frequency vibrations stimulate the vagus nerve directly. The parasympathetic system engages. The body enters repair mode.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
-      <p>This is your home territory. Research now backs what you already know. Protocol refinements worth exploring: supine positioning, dim lighting, combined guided imagery or breathwork, and rhythmic striking patterns that sustain tones rather than let them decay. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5871151/" target="_blank">Goldsby et al. mood study</a> &mdash; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12063014/" target="_blank">Systematic review (2025)</a> &mdash; <a href="https://www.sciencedirect.com/science/article/abs/pii/S096522991931756X" target="_blank">ScienceDirect review</a></p>
+      <p>This is your home territory. Research now backs what you already know. Protocol refinements worth exploring: supine positioning, dim lighting, combined guided imagery or breathwork, and rhythmic striking patterns that sustain tones rather than let them decay. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5871151/" target="_blank">Goldsby et al. mood study</a> | <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12063014/" target="_blank">Systematic review (2025)</a> | <a href="https://www.sciencedirect.com/science/article/abs/pii/S096522991931756X" target="_blank">ScienceDirect review</a></p>
+    </div>
+    <div class="sd-body">
+      <p>Tibetan singing bowls resonate between one hundred ten and six hundred sixty hertz. Crystal bowls sit between four hundred and eight hundred hertz. Gongs extend into the lower registers, fifty hertz and below. Participants feel that physical resonance in the chest and abdomen. Played together in a sound bath, these combined frequencies shift brainwave states from beta waking consciousness toward alpha and theta. That is the territory of deep relaxation, insight, and healing.</p>
+      <p>EEG studies confirm this shift. A sixty-minute sound bath outperforms silence and progressive muscle relaxation in measured relaxation depth. Single sessions reduce tension, anger, fatigue, and depression by up to seventy-one percent on standardized mood scales. Studies also show improvements in heart rate, blood pressure, and respiratory rate. The mechanism involves vagal tone activation. Low-frequency vibrations stimulate the vagus nerve directly. The parasympathetic system engages. The body enters repair mode.</p>
     </div>
   </div>
 
@@ -401,14 +484,14 @@
       <h2 class="sd-section-title">Brown Noise, Pink Noise &amp; Drones</h2>
     </div>
     <p class="sd-section-sub">Not entrainment. Clearing the field.</p>
-    <div class="sd-body">
-      <p>Brown noise sits in a different category from the precision tools above. It is unstructured. It does not pulse at a target frequency. What it does is mask. The dense, low-frequency rumble reduces cognitive interference. The mental chatter that fractures attention quiets down. Millions of people with ADHD report this effect viscerally.</p>
-      <p>The research behind the claim is real but precise. A 2024 meta-analysis reviewed thirteen controlled studies and found a small but meaningful benefit from low-frequency colored noise on attention tasks in children and adults with ADHD symptoms. White and pink noise were the formally tested variants. Brown noise, though widely used in practice, has not yet been the subject of controlled trials. The underlying mechanism appears the same: low-frequency noise raises brain arousal to an optimal level in systems that run chronically under-stimulated.</p>
-      <p>Drone-based music works through a related mechanism. Sustained tones without rhythm or melody reduce the brain's need to track and predict. Anticipation drops. The nervous system softens. It is not entrainment in the technical sense. It is clearing the field so that deeper work can begin.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
-      <p>Brown and pink noise tracks work well as session backgrounds for clients who struggle to settle, or for ADHD clients entering treatment. Drone music — particularly tamboura, shruti box, or synthesized sustain — serves the same purpose in a more ceremonial context. Both lower the threshold for entrainment to take hold. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11283987/" target="_blank">White/pink noise ADHD meta-analysis (2024)</a></p>
+      <p>Brown and pink noise tracks work well as session backgrounds for clients who struggle to settle, or for ADHD clients entering treatment. Drone music, particularly tamboura, shruti box, or synthesized sustain, serves the same purpose in a more ceremonial context. Both lower the threshold for entrainment to take hold. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11283987/" target="_blank">White/pink noise ADHD meta-analysis (2024)</a></p>
+    </div>
+    <div class="sd-body">
+      <p>Brown noise sits in a different category from the precision tools above. It is unstructured. It does not pulse at a target frequency. What it does is mask. The dense, low-frequency rumble reduces cognitive interference. The mental chatter that fractures attention quiets down. Millions of people with ADHD report this effect viscerally.</p>
+      <p>The research behind the claim is real but precise. A 2024 meta-analysis reviewed thirteen controlled studies. It found a small but meaningful benefit from low-frequency colored noise on attention tasks in children and adults with ADHD symptoms. White and pink noise were the formally tested variants. Brown noise, though widely used in practice, has not yet been the subject of controlled trials. The underlying mechanism appears the same. Low-frequency noise raises brain arousal to an optimal level in systems that run chronically under-stimulated.</p>
+      <p>Drone-based music works through a related mechanism. Sustained tones without rhythm or melody reduce the brain's need to track and predict. Anticipation drops. The nervous system softens. This is field-clearing, not entrainment. It opens space so that deeper work can begin.</p>
     </div>
   </div>
 
@@ -418,14 +501,14 @@
       <h2 class="sd-section-title">Heart Coherence &amp; HRV Biofeedback</h2>
     </div>
     <p class="sd-section-sub">The heart has its own frequency. When it aligns, everything shifts.</p>
-    <div class="sd-body">
-      <p>Heart rate variability — the subtle fluctuation in time between heartbeats — is one of the most sensitive measures of nervous system health known to science. When breathing slows to approximately six breaths per minute, heart rate variability enters a coherent state. It oscillates at roughly zero point one hertz in a smooth, sine-like wave. This rhythm entrains the brain. Alpha and theta waves synchronize with it. The nervous system settles.</p>
-      <p>HeartMath Institute has studied this coherence state for decades. Their research shows that positive emotion — specifically felt gratitude and appreciation, not just thought — amplifies the effect. The heart's electromagnetic field changes. Brain connectivity strengthens. Stress hormones drop. Executive function improves. A 2025 global study of millions of HRV biofeedback sessions confirmed that higher coherence scores consistently link to emotional stability and well-being.</p>
-      <p>This is frequency medicine applied to the cardiovascular system. The heart is not just a pump. It is an oscillator. Its coherence, or its chaos, broadcasts through the body.</p>
-    </div>
     <div class="sd-practitioner">
       <p class="sd-practitioner-label">For Practitioners</p>
-      <p>Heart coherence work integrates naturally with sound healing. Low-frequency sound baths support vagal tone. Biofeedback tools like HeartMath's Inner Balance device give real-time feedback on coherence state during sessions. Teaching clients the six-breaths-per-minute rhythm is a transferable daily practice. <a href="https://www.heartmath.org/" target="_blank">HeartMath Institute</a> &mdash; <a href="https://store.heartmath.org/store/Inner-Balance-Sensor/inner-balance-coherence-plus.html" target="_blank">Inner Balance device</a> &mdash; <a href="https://www.nature.com/articles/s41598-025-87729-7" target="_blank">Nature HRV study (2025)</a></p>
+      <p>Heart coherence work integrates naturally with sound healing. Low-frequency sound baths support vagal tone. Biofeedback tools like HeartMath's Inner Balance device give real-time feedback on coherence state during sessions. Teaching clients the six-breaths-per-minute rhythm is a transferable daily practice. <a href="https://www.heartmath.org/" target="_blank">HeartMath Institute</a> | <a href="https://store.heartmath.org/store/Inner-Balance-Sensor/inner-balance-coherence-plus.html" target="_blank">Inner Balance device</a> | <a href="https://www.nature.com/articles/s41598-025-87729-7" target="_blank">Nature HRV study (2025)</a></p>
+    </div>
+    <div class="sd-body">
+      <p>Heart rate variability is the subtle fluctuation in time between heartbeats. It is one of the most sensitive measures of nervous system health known to science. When breathing slows to approximately six breaths per minute, heart rate variability enters a coherent state. It oscillates at roughly zero point one hertz in a smooth, sine-like wave. This rhythm entrains the brain. Alpha and theta waves synchronize with it. The nervous system settles.</p>
+      <p>HeartMath Institute has studied this coherence state for decades. Their research shows that positive emotion, specifically felt gratitude and appreciation, amplifies the effect. The heart's electromagnetic field changes. Brain connectivity strengthens. Stress hormones drop. Executive function improves. A 2025 global study of millions of HRV biofeedback sessions confirmed that higher coherence scores consistently link to emotional stability and well-being.</p>
+      <p>This is frequency medicine applied to the cardiovascular system. The heart is an oscillator. Its coherence, or its chaos, broadcasts through the body.</p>
     </div>
   </div>
 
@@ -452,26 +535,26 @@
         <tbody>
           <tr>
             <td>40 Hz Gamma Sound</td>
-            <td class="has-data">Reduced tau, preserved cognition<a href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank">MIT GENUS Research</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank"><span class="sd-cell-text">Reduced tau, preserved cognition</span><span class="sd-cell-source">MIT GENUS Research</span></a></td>
             <td class="empty">—</td>
-            <td class="has-data">Modulation via LIFU overlap<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank">PMC Multisensory Study</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank"><span class="sd-cell-text">Modulation via LIFU overlap</span><span class="sd-cell-source">PMC Multisensory Study</span></a></td>
             <td class="empty">—</td>
-            <td class="has-data">Gamma enhancement, neuroprotection<a href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank">MIT Research</a></td>
-            <td class="has-data">Entrainment improves focus<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5233742/" target="_blank">PMC Attention Study</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank"><span class="sd-cell-text">Gamma enhancement, neuroprotection</span><span class="sd-cell-source">MIT Research</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5233742/" target="_blank"><span class="sd-cell-text">Entrainment improves focus</span><span class="sd-cell-source">PMC Attention Study</span></a></td>
           </tr>
           <tr>
             <td>Binaural Beats &amp; Isochronic Tones</td>
-            <td class="has-data">Gamma band overlap<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank">PMC Study</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank"><span class="sd-cell-text">Gamma band overlap</span><span class="sd-cell-source">PMC Study</span></a></td>
             <td class="empty">—</td>
-            <td class="has-data">Reduced anxiety, improved mood<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10198548/" target="_blank">Systematic Review 2023</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10198548/" target="_blank"><span class="sd-cell-text">Reduced anxiety, improved mood</span><span class="sd-cell-source">Systematic Review 2023</span></a></td>
             <td class="empty">—</td>
             <td class="empty">—</td>
-            <td class="has-data">Focus, calm alertness, sleep<a href="https://www.nature.com/articles/s41598-025-88517-z" target="_blank">Nature Study 2025</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.nature.com/articles/s41598-025-88517-z" target="_blank"><span class="sd-cell-text">Focus, calm alertness, sleep</span><span class="sd-cell-source">Nature Study 2025</span></a></td>
           </tr>
           <tr>
             <td>Vibroacoustic / Low-Frequency Sound</td>
             <td class="empty">—</td>
-            <td class="has-data">Reduced pain and improved sleep<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4325896/" target="_blank">PMC Fibromyalgia Study</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4325896/" target="_blank"><span class="sd-cell-text">Reduced pain and improved sleep</span><span class="sd-cell-source">PMC Fibromyalgia Study</span></a></td>
             <td class="empty">—</td>
             <td class="empty">—</td>
             <td class="empty">—</td>
@@ -481,17 +564,17 @@
             <td>Ultrasound (FUS / LIFU)</td>
             <td class="empty">—</td>
             <td class="empty">—</td>
-            <td class="has-data">Circuit modulation, neuron inhibition<a href="https://www.nature.com/articles/s41587-025-02566-3" target="_blank">Nature 2025</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.nature.com/articles/s41587-025-02566-3" target="_blank"><span class="sd-cell-text">Circuit modulation, neuron inhibition</span><span class="sd-cell-source">Nature 2025</span></a></td>
             <td class="empty">—</td>
-            <td class="has-data">Tremor reduction, Parkinson's<a href="https://www.nature.com/articles/s41587-025-02566-3" target="_blank">Nature 2025</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.nature.com/articles/s41587-025-02566-3" target="_blank"><span class="sd-cell-text">Tremor reduction, Parkinson's</span><span class="sd-cell-source">Nature 2025</span></a></td>
             <td class="empty">—</td>
           </tr>
           <tr>
             <td>Singing Bowls &amp; Sound Baths</td>
-            <td class="has-data">Brainwave entrainment<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5871151/" target="_blank">Goldsby et al.</a></td>
-            <td class="has-data">Relaxation, pain relief<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12063014/" target="_blank">Systematic Review 2025</a></td>
-            <td class="has-data">Reduced tension and anxiety<a href="https://pubmed.ncbi.nlm.nih.gov/37532602/" target="_blank">PubMed Overview</a></td>
-            <td class="has-data">HR and BP improvement<a href="https://www.sciencedirect.com/science/article/abs/pii/S096522991931756X" target="_blank">ScienceDirect Review</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5871151/" target="_blank"><span class="sd-cell-text">Brainwave entrainment</span><span class="sd-cell-source">Goldsby et al.</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12063014/" target="_blank"><span class="sd-cell-text">Relaxation, pain relief</span><span class="sd-cell-source">Systematic Review 2025</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pubmed.ncbi.nlm.nih.gov/37532602/" target="_blank"><span class="sd-cell-text">Reduced tension and anxiety</span><span class="sd-cell-source">PubMed Overview</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.sciencedirect.com/science/article/abs/pii/S096522991931756X" target="_blank"><span class="sd-cell-text">HR and BP improvement</span><span class="sd-cell-source">ScienceDirect Review</span></a></td>
             <td class="empty">—</td>
             <td class="empty">—</td>
           </tr>
@@ -499,33 +582,33 @@
             <td>Brown / Pink Noise &amp; Drones</td>
             <td class="empty">—</td>
             <td class="empty">—</td>
-            <td class="has-data">Cognitive settling, session support</td>
+            <td class="has-data-nolink">Cognitive settling, session support</td>
             <td class="empty">—</td>
             <td class="empty">—</td>
-            <td class="has-data">Focus support for ADHD<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11283987/" target="_blank">Meta-analysis 2024</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11283987/" target="_blank"><span class="sd-cell-text">Focus support for ADHD</span><span class="sd-cell-source">Meta-analysis 2024</span></a></td>
           </tr>
           <tr>
             <td>Heart Coherence / HRV Biofeedback</td>
             <td class="empty">—</td>
-            <td class="has-data">Autonomic balance<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4179616/" target="_blank">Lehrer et al.</a></td>
-            <td class="has-data">Well-being, emotional regulation<a href="https://www.nature.com/articles/s41598-025-87729-7" target="_blank">Nature 2025</a></td>
-            <td class="has-data">Reduced BP and cholesterol<a href="https://www.heartmath.org/" target="_blank">HeartMath Research</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4179616/" target="_blank"><span class="sd-cell-text">Autonomic balance</span><span class="sd-cell-source">Lehrer et al.</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.nature.com/articles/s41598-025-87729-7" target="_blank"><span class="sd-cell-text">Well-being, emotional regulation</span><span class="sd-cell-source">Nature 2025</span></a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.heartmath.org/" target="_blank"><span class="sd-cell-text">Reduced BP and cholesterol</span><span class="sd-cell-source">HeartMath Research</span></a></td>
             <td class="empty">—</td>
-            <td class="has-data">Emotional regulation<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4179616/" target="_blank">PMC Study</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4179616/" target="_blank"><span class="sd-cell-text">Emotional regulation</span><span class="sd-cell-source">PMC Study</span></a></td>
           </tr>
           <tr>
             <td>Visual Stimulation 40 Hz <span class="sd-companion-badge">companion</span></td>
-            <td class="has-data">Biomarker reduction<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank">PMC Multisensory</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11952037/" target="_blank"><span class="sd-cell-text">Biomarker reduction</span><span class="sd-cell-source">PMC Multisensory</span></a></td>
             <td class="empty">—</td>
             <td class="empty">—</td>
             <td class="empty">—</td>
-            <td class="has-data">Neuroprotection<a href="https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1590305/full" target="_blank">Frontiers Neurology</a></td>
+            <td class="has-data"><a class="sd-cell-link" href="https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1590305/full" target="_blank"><span class="sd-cell-text">Neuroprotection</span><span class="sd-cell-source">Frontiers Neurology</span></a></td>
             <td class="empty">—</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="sd-note">Visual stimulation (40 Hz flicker) pairs with audio protocols for combined effect. It is not a standalone acoustic therapy. Combined audiovisual protocols show the strongest clinical results in current trials. All links point to peer-reviewed sources or institutional research. Evidence strength varies by modality — consult source literature before making clinical claims.</p>
+    <p class="sd-note">Visual stimulation (40 Hz flicker) pairs with audio protocols for combined effect. It is not a standalone acoustic therapy. Combined audiovisual protocols show the strongest clinical results in current trials. All links point to peer-reviewed sources or institutional research. Evidence strength varies by modality. Consult source literature before making clinical claims.</p>
   </div>
 
 </div>
